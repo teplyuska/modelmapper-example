@@ -10,16 +10,19 @@ class Mapper {
     Mapper() {
         mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        setupMappings();
     }
 
-    private void setupMappings() {
+    void setupMappingsError() {
         mapper.addMappings(new PropertyMap<From, To>() {
             @Override
             protected void configure() {
                 skip().setId(null);
             }
         });
+    }
+
+    void setupMappingsSuccess() {
+        mapper.addMappings(new FromToMap());
     }
 
     void validate() {
